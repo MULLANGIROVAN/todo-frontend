@@ -1,6 +1,8 @@
 const TOKEN_KEY = 'todo_token'
 const USER_KEY = 'todo_user'
 
+const API_URL = import.meta.env.VITE_API_URL || ''
+
 export function getToken() {
   return localStorage.getItem(TOKEN_KEY)
 }
@@ -53,12 +55,17 @@ export async function handleResponse(response) {
 
 export async function apiFetch(url, options = {}) {
   const token = getToken()
+
   const headers = {
     ...(options.body ? { 'Content-Type': 'application/json' } : {}),
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
     ...options.headers,
   }
 
-  const response = await fetch(url, { ...options, headers })
+  const response = await fetch(`${API_URL}${url}`, {
+    ...options,
+    headers,
+  })
+
   return handleResponse(response)
 }
