@@ -1,0 +1,38 @@
+:root {
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --bg-deep: #0f0c29;
+  --bg-mid: #302b63;
+  --bg-light: #24243e;
+  --accent-start: #7c3aed;
+  --accent-end: #06b6d4;
+  --surface: rgba(255, 255, 255, 0.92);
+  --surface-border: rgba(255, 255, 255, 0.55);
+  --text-primary: #1e1b4b;
+  --text-muted: #64748b;
+  --shadow-lg: 0 24px 60px rgba(15, 12, 41, 0.35);
+  --shadow-card: 0 8px 24px rgba(124, 58, 237, 0.12);
+  --radius-lg: 1.25rem;
+  --radius-md: 0.875rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.min-w-0 {
+  min-width: 0;
+}
