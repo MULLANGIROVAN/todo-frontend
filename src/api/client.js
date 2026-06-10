@@ -1,7 +1,12 @@
 const TOKEN_KEY = 'todo_token'
 const USER_KEY = 'todo_user'
 
-const API_URL = import.meta.env.VITE_API_URL || ''
+const API_URL = import.meta.env.VITE_API_URL
+
+// ✅ Safety check (IMPORTANT)
+if (!API_URL) {
+  throw new Error("VITE_API_URL is not defined in environment variables")
+}
 
 export function getToken() {
   return localStorage.getItem(TOKEN_KEY)
@@ -30,6 +35,7 @@ export function clearAuth() {
 export async function handleResponse(response) {
   if (!response.ok) {
     let message = `Request failed (${response.status})`
+
     try {
       const text = await response.text()
       if (text) {
@@ -41,15 +47,18 @@ export async function handleResponse(response) {
         }
       }
     } catch {
-      // keep default message
+      // ignore
     }
+
     const error = new Error(message)
     error.status = response.status
     throw error
   }
+
   if (response.status === 204) {
     return null
   }
+
   return response.json()
 }
 
